@@ -19,25 +19,85 @@ Vue.createApp({
         imageProfile:
           "image/profil2.png",
         },
-        articles1: 
-        {
-          title : "Gunung Prau",
-          description: "Gunung yang kali ini saya daki adalah gunung prau yang memiliki ketinggian 2.565 mdpl terletak di dieng, jawa tengah, indonesia. Telaga warna di dieng plateau ini terletak pada ketinggian 2000 mdpl, dimana pemandangan di tempat ini sangat indah. Nama dieng berasal dari bahasa sansekerta die hieyang ( edi dan aeng ) indah dan langka",
-          thumbnail: 'image/prau.jpeg'
+
+        table:{
+          tjudul:"TABEL KETERAMPILAN",
+          th:["No.","Skill","Keterampilan"],
+          tr:[
+            {
+              "k":"Python",
+              "s":"Intermediatte"
+            },
+            {
+              "k":"C++",
+              "s":"Intermediatte"
+            },
+            {
+              "k":"Javascript",
+              "s":"Intermediatte"
+            },
+            {
+              "k":"HTML",
+              "s":"Expert"
+            },
+            {
+              "k":"CSS",
+              "s":"Expert"
+            },
+            {
+              "k":"Microsoft Power Point",
+              "s":"Expert"
+            },
+            {
+              "k":"Microsoft Excell",
+              "s":"Intermediatte"
+            },
+            {
+              "k":"Microsoft Word",
+              "s":"Expert"
+            },
+          ],
         },
-        articles2: 
-        {
-          title: "Pangonan",
-          description: "Gunung dengan ketinggian 2.300 mdpl ini menjadi banyak incaran para muda mudi dan doyan survive. Uniknya, sebagian besar pengunjung datang bukan untuk mendaki hingga puncak, melainkan mengunjungi sabana luas yang berada di badan gunung. Lokasinya yang masih satu komplek dengan wisata Candi Arjuna, Kawah Sikidang, dan Telaga Warna, memudahkan wisatawan untuk mengakses gunung ini.",
-          thumbnail: "image/pangonan.jpeg"
-        },
-        articles3: 
-        {
-          title: "Gunung Slamet",
-          description: "Gunung Slamet adalah gunung tertinggi di Jawa Tengah dan merupakan gunung tertinggi kedua di Pulau Jawa dengan ketinggian 3.432 mdpl. Pada masa penjelajahan dunia yang pertama Sir Frances Drake, seorang pelaut Inggris pada tahun 1580, ketika itu melihat Gunung Slamet dan segera mengarahkan perahunya dan berlabuh di Cilacap.",
-          thumbnail: 'image/slamet.jpeg'
-        },
+        article:[],
+        read:null
       
     };
   },
+  methods: {
+    getArticle() {
+        axios
+            .get(
+                src = "./contents/article.json"
+            )
+            .then((res) => {
+                console.log(res.data);
+                this.article = res.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    showArticle() {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const read = urlParams.get('read');
+        var converter = new showdown.Converter();
+        axios
+            .get(
+                src="./contents/"+read
+            )
+            .then((res) => {
+                var html = converter.makeHtml(res.data);
+                this.read = html;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+},
+beforeMount() { //fungsi yang dipanggil oleh vue sebelum mount terjadi
+    this.getArticle(),
+    this.showArticle()
+
+},
 }).mount("#app");

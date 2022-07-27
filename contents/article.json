@@ -1,0 +1,23 @@
+[
+    {
+      "ID" : "1",
+      "title" : "Gunung Prau",
+      "description" : "Gunung yang kali ini saya daki adalah gunung prau yang memiliki ketinggian 2.565 mdpl terletak di dieng, jawa tengah, indonesia.",
+      "thumbnail" : "image/prau.jpeg",
+      "content":"articles1.md"
+    },
+    {
+      "ID" : "2",
+      "title": "BMX Parkour",
+      "description": "Parkour adalah salah satu olahraga ekstrem yang cukup banyak diminati, khususnya oleh anak muda.",
+      "thumbnail": "image/sepeda.jpeg",
+      "content":"articles2.md"
+    },
+    {
+      "ID" : "3",
+      "title": "Mancing",
+      "description": "Memancing di kawasan perkotaan ala bapak-bapak: bukan memancing biasa.",
+      "thumbnail": "image/mancing.jpg",
+      "content":"articles3.md"
+    }
+  ]
